@@ -11,6 +11,7 @@ describe("Rozetka tests", () => {
   beforeEach(() => {
     basePage.openMainPage();
   });
+
   it("check the ability to search for a product using valid data", () => {
     const testProductName = constants.searchProduct;
     basePage.searchProduct(testProductName);
@@ -29,17 +30,14 @@ describe("Rozetka tests", () => {
   it("check the ability to search for a product category using catalog features", () => {
     basePage.showCatalogDropdown();
     basePage.showSubcatalogDropdown(constants.categoryLinkText);
-    basePage.openSubcategory("Ноутбуки");
+    basePage.openSubcategory(constants.categoryHeading);
     searchResultsPage.checkCategoryName(constants.categoryHeading);
-  }); /* 
-  it.only("The links in the catalog sidebar on the main page lead to the corresponding catalog pages",()=>{
-   
-  }) */
+  });
 
   basePage.menuCategoriesLinks.forEach((menuCatLink) => {
     it(`The link "${menuCatLink}" in the sidebar on the main page lead to the corresponding catalog page`, () => {
       cy.get(basePage.navigationSidebar).contains(menuCatLink).click();
-      cy.get(".portal__heading").contains(menuCatLink).should("be.visible");
+      cy.get(searchResultsPage.currentCategoryHeader).contains(menuCatLink).should("be.visible");
     });
   });
 });

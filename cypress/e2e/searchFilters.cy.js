@@ -6,6 +6,7 @@ const basePage = new BasePage();
 const searchResultsPage = new SearchResultsPage();
 
 const { minPrice, maxPrice, cancelFilterLinkText, LenovoBrand } = constants;
+
 const contractor = {
   req: {
     method: "GET",
@@ -21,6 +22,7 @@ const contractor = {
 };
 
 describe("Testing search results filtering", () => {
+
   it("check the ability to search for a product using price and brand filters", () => {
     basePage.openNotebooksCategoryPage();
     searchResultsPage.clickBrandFilter(LenovoBrand);
@@ -28,16 +30,19 @@ describe("Testing search results filtering", () => {
     searchResultsPage.checkPricesBetweenLimits(minPrice, maxPrice);
     searchResultsPage.checkCancelFilterButtonVisibility(cancelFilterLinkText);
   });
+
   it("check server response when using brand filter", () => {
     cy.intercept("GET", /product_ids/).as("testRequest");
     basePage.openNotebooksCategoryPage();
-    searchResultsPage.clickBrandFilter(constants.LenovoBrand);
+    searchResultsPage.clickBrandFilter(LenovoBrand);
+    //receiving network data
     cy.wait("@testRequest").should(({ request, response }) => {
       searchResultsPage.checkIsResponseOk(request, response, contractor);
+      //validation network response
       const productExample = response.body.data[0];
       expect(productExample).to.have.property(
         contractor.res.productData.brandKey,
-        constants.LenovoBrand
+        LenovoBrand
       );
       searchResultsPage.checkIsPropsExist(
         productExample,
