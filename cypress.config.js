@@ -9,9 +9,9 @@ module.exports = defineConfig({
   requestTimeout: 10000,
   video: false,
   e2e: {
+    baseUrl:"https://rozetka.com.ua/ua",
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-  
   },
 });

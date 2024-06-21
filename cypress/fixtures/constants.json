@@ -4,6 +4,9 @@
     "categoryHeading": "Ноутбуки",
     "filterPageUrl": "https://rozetka.com.ua/ua/notebooks/c80004/",
     "cancelFilterLinkText": "Скасувати",
-    "LenovoBrand":"Lenovo"
+    "LenovoBrand":"Lenovo",
+    "minPrice":10000,
+    "maxPrice":35000,
+    "invalidSearchString":"valnaskjchczz;woeiudfrnv;lkgrc sdflkg@#$"
   }
   
